@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text XML</title>
+    <script type="text/javascript" src="gismeteo.js"></script>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div id="forecast"></div>
+<script type="text/javascript">
+    var template={
+//    "town":"{sname}[{index}] координаты (широта {latitude} гр., долгота {longitude} гр.)",
+        "forecast":" ",
+//    "phenomena":"Атмосферные явления: {scloudiness}({cloudiness}) {sprecipitation}({precipitation}) ({rpower} , {spower})",
+//    "pressure":" Давление: {min}...{max} мм.рт.ст.",
+        "temperature":"Температура: {min}...{max} *С",
+//    "wind":"Ветер {sdirection}({direction}), скорость:{min}...{max} м/с",
+//    "relwet":"Относительная влажность: {min}...{max} %",
+//    "heat":"Комфортная температура: {min}...{max} *С",
+        "t_forecast":"{forecast} {temperature} <BR\>  <HR\>",
+        "t_template":"{forecasts}"
+    };
+    drawGismeteoInformer("xml.php?url=http://informer.gismeteo.ru/xml/27612_1.xml", "forecast", template);
+</script>
+</body>
+
+</html>
