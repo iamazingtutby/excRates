@@ -22,7 +22,7 @@
             try {
                 var rates = JSON.parse(xhr.responseText);
             } catch (e) {
-                alert("Некорректный ответ " + e.message);
+                //alert("Некорректный ответ " + e.message);
             }
 
             showRates(rates);
@@ -75,9 +75,9 @@ function showRates(rates) {
         "type": "serial",
         dataProvider : rates.query.results.Currency.Record,
         "theme": "light",
-        "marginRight": 80,
+        //"marginRight": 80,
         "marginLeft": 50,
-        "marginBottom": 150,
+        //"marginBottom": 150,
         "autoMarginOffset": 50,
         //"dataDateFormat": "YYYY-MM-DD",
         "valueAxes": [{
@@ -101,32 +101,32 @@ function showRates(rates) {
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
             "bulletSize": 5,
-            "hideBulletsCount": 50,
-            "lineThickness": 2,
+            "hideBulletsCount": 20,
+            //"lineThickness": 2,
             "title": "red line",
             "useLineColorForBulletBorder": true,
             "valueField": "Rate",
-            "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+            "balloonText": "<span style='font-size:15px;'>[[value]]</span>"
         }],
-        "chartScrollbar": {
-            "graph": "g1",
-            "oppositeAxis":false,
-            "offset":30,
-            "scrollbarHeight": 80,
-            "backgroundAlpha": 0,
-            "selectedBackgroundAlpha": 0.1,
-            "selectedBackgroundColor": "#888888",
-            "graphFillAlpha": 0,
-            "graphLineAlpha": 0.5,
-            "selectedGraphFillAlpha": 0,
-            "selectedGraphLineAlpha": 1,
-            "autoGridCount":true,
-            "color":"#AAAAAA"
-        },
+        //"chartScrollbar": {
+        //    "graph": "g1",
+        //    "oppositeAxis":false,
+        //    "offset":30,
+        //    "scrollbarHeight": 80,
+        //    "backgroundAlpha": 0,
+        //    "selectedBackgroundAlpha": 0.1,
+        //    "selectedBackgroundColor": "#888888",
+        //    "graphFillAlpha": 0,
+        //    "graphLineAlpha": 0.5,
+        //    "selectedGraphFillAlpha": 0,
+        //    "selectedGraphLineAlpha": 1,
+        //    "autoGridCount":true,
+        //    "color":"#AAAAAA"
+        //},
         "chartCursor": {
             "pan": true,
-            "valueLineEnabled": true,
-            "valueLineBalloonEnabled": true,
+            //"valueLineEnabled": true,
+            //"valueLineBalloonEnabled": true,
             "cursorAlpha":1,
             "cursorColor":"#258cbb",
             "limitToGraph":"g1",
@@ -141,7 +141,13 @@ function showRates(rates) {
         "categoryAxis": {
                 gridPosition: "start",
                 axisColor: "#DADADA",
-                labelRotation : 90
+                //labelRotation : 90,
+
+            "parseDates": true,
+            "axisAlpha": 0,
+            "gridAlpha": 0,
+            "inside": true,
+            "tickLength": 0
         }
 
     });
