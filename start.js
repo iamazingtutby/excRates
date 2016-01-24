@@ -17,7 +17,7 @@
 
         if (xhr.status != 200) {
             // обработать ошибку
-            alert(xhr.status + ': ' + xhr.statusText);
+            //alert(xhr.status + ': ' + xhr.statusText);
         } else {
             try {
                 var rates = JSON.parse(xhr.responseText);
@@ -43,35 +43,7 @@ function showRates(rates) {
 
     //console.log(rates.query.results.Currency.Record);
     var chart = AmCharts.makeChart("chartdiv", {
-        //type: "serial",
-        //dataProvider : rates.query.results.Currency.Record,
-        //categoryField: "Date",
-        ////rotate: true,
-        //
-        //categoryAxis: {
-        //    gridPosition: "start",
-        //    axisColor: "#DADADA",
-        //    labelRotation : 90
-        //},
-        //valueAxes: [{
-        //    axisAlpha: 0.5
-        //}],
-        //graphs: [{
-        //    type: "line",
-        //    //title: "Income",
-        //    valueField: "Rate",
-        //    bullet : "round",
-        //    bulletBorderColor : "#FFFFFF",
-        //    bulletBorderThickness : 2,
-        //    bulletBorderAlpha : 1,
-        //    lineColor : "#5fb503",
-        //    lineAlpha: 0,
-        //    fillColors: "#ADD981",
-        //    fillAlphas: 0.8,
-        //    negativeLineColor : "#efcc26",
-        //    hideBulletsCount : 500, // !!!
-        //    balloonText: "[[value]]"
-        //}]
+
         "type": "serial",
         dataProvider : rates.query.results.Currency.Record,
         "theme": "light",
@@ -90,6 +62,7 @@ function showRates(rates) {
             "borderThickness": 1,
             "shadowAlpha": 0
         },
+
         "graphs": [{
             "id": "g1",
             "balloon":{
@@ -101,7 +74,7 @@ function showRates(rates) {
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
             "bulletSize": 5,
-            "hideBulletsCount": 20,
+            "hideBulletsCount": 10,
             //"lineThickness": 2,
             "title": "red line",
             "useLineColorForBulletBorder": true,
@@ -146,17 +119,18 @@ function showRates(rates) {
             "parseDates": true,
             "axisAlpha": 0,
             "gridAlpha": 0,
-            "inside": true,
+            "inside": false,
             "tickLength": 0
         }
 
     });
+
     chart.addListener("rendered", zoomChart);
 
     zoomChart();
 
     function zoomChart() {
-        chart.zoomToIndexes(chart.dataProvider.length - 10, chart.dataProvider.length - 1);
+        chart.zoomToIndexes(chart.dataProvider.length - 15, chart.dataProvider.length - 1);
     }
 
 }
