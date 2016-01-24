@@ -2,7 +2,7 @@
 (function($){
 
     var today = tempus().format('%m/%d/%Y');
-    var today_five = tempus().calc({month: -5}).format('%m/%d/%Y');
+    var today_five = tempus().calc({month: -3}).format('%m/%d/%Y');
 
     function loadData() {
 
@@ -42,37 +42,116 @@ function showRates(rates) {
 
 
     //console.log(rates.query.results.Currency.Record);
-    AmCharts.makeChart("chartdiv", {
-        type: "serial",
+    var chart = AmCharts.makeChart("chartdiv", {
+        //type: "serial",
+        //dataProvider : rates.query.results.Currency.Record,
+        //categoryField: "Date",
+        ////rotate: true,
+        //
+        //categoryAxis: {
+        //    gridPosition: "start",
+        //    axisColor: "#DADADA",
+        //    labelRotation : 90
+        //},
+        //valueAxes: [{
+        //    axisAlpha: 0.5
+        //}],
+        //graphs: [{
+        //    type: "line",
+        //    //title: "Income",
+        //    valueField: "Rate",
+        //    bullet : "round",
+        //    bulletBorderColor : "#FFFFFF",
+        //    bulletBorderThickness : 2,
+        //    bulletBorderAlpha : 1,
+        //    lineColor : "#5fb503",
+        //    lineAlpha: 0,
+        //    fillColors: "#ADD981",
+        //    fillAlphas: 0.8,
+        //    negativeLineColor : "#efcc26",
+        //    hideBulletsCount : 500, // !!!
+        //    balloonText: "[[value]]"
+        //}]
+        "type": "serial",
         dataProvider : rates.query.results.Currency.Record,
-        categoryField: "Date",
-        //rotate: true,
-
-        categoryAxis: {
-            gridPosition: "start",
-            axisColor: "#DADADA",
-            labelRotation : 90
-        },
-        valueAxes: [{
-            axisAlpha: 0.5
+        "theme": "light",
+        "marginRight": 80,
+        "marginLeft": 50,
+        "marginBottom": 150,
+        "autoMarginOffset": 50,
+        //"dataDateFormat": "YYYY-MM-DD",
+        "valueAxes": [{
+            //"id": "v1",
+            "axisAlpha": 0,
+            "position": "left",
+            "ignoreAxisWidth":true
         }],
-        graphs: [{
-            type: "line",
-            //title: "Income",
-            valueField: "Rate",
-            bullet : "round",
-            bulletBorderColor : "#FFFFFF",
-            bulletBorderThickness : 2,
-            bulletBorderAlpha : 1,
-            lineColor : "#5fb503",
-            lineAlpha: 0,
-            fillColors: "#ADD981",
-            fillAlphas: 0.8,
-            negativeLineColor : "#efcc26",
-            hideBulletsCount : 500, // !!!
-            balloonText: "[[value]]"
-        }]
+        "balloon": {
+            "borderThickness": 1,
+            "shadowAlpha": 0
+        },
+        "graphs": [{
+            "id": "g1",
+            "balloon":{
+                "drop":false,
+                "adjustBorderColor":false,
+                "color":"#ffffff"
+            },
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "bulletSize": 5,
+            "hideBulletsCount": 50,
+            "lineThickness": 2,
+            "title": "red line",
+            "useLineColorForBulletBorder": true,
+            "valueField": "Rate",
+            "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+        }],
+        "chartScrollbar": {
+            "graph": "g1",
+            "oppositeAxis":false,
+            "offset":30,
+            "scrollbarHeight": 80,
+            "backgroundAlpha": 0,
+            "selectedBackgroundAlpha": 0.1,
+            "selectedBackgroundColor": "#888888",
+            "graphFillAlpha": 0,
+            "graphLineAlpha": 0.5,
+            "selectedGraphFillAlpha": 0,
+            "selectedGraphLineAlpha": 1,
+            "autoGridCount":true,
+            "color":"#AAAAAA"
+        },
+        "chartCursor": {
+            "pan": true,
+            "valueLineEnabled": true,
+            "valueLineBalloonEnabled": true,
+            "cursorAlpha":1,
+            "cursorColor":"#258cbb",
+            "limitToGraph":"g1",
+            "valueLineAlpha":0.2
+        },
+        //"valueScrollbar":{
+        //    "oppositeAxis":false,
+        //    "offset":50,
+        //    "scrollbarHeight":10
+        //},
+        "categoryField": "Date",
+        "categoryAxis": {
+                gridPosition: "start",
+                axisColor: "#DADADA",
+                labelRotation : 90
+        }
+
     });
+    chart.addListener("rendered", zoomChart);
+
+    zoomChart();
+
+    function zoomChart() {
+        chart.zoomToIndexes(chart.dataProvider.length - 10, chart.dataProvider.length - 1);
+    }
 
 }
 
